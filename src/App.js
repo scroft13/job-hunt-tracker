@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { AuthProvider } from "./AuthContext";
+import Container from "@material-ui/core/Container";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
+import Signup from "./Components/Authentication/Signup";
+import Dashboard from "./Components/Dashboard";
+import Login from "./Components/Authentication/Login";
+import UpdateEmail from "./Components/Authentication/UpdateEmail";
+import UpdateUser from "./Components/Authentication/UpdateUser";
+import Profile from "./Components/Authentication/Profile";
+import ForgotPassword from "./Components/Authentication/ForgotPassword";
+import Navbar from "./Components/Navbar";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Router>
+        <AuthProvider>
+          <Navbar />
+          <Switch>
+            <PrivateRoute exact path="/" component={Dashboard}/>
+            <PrivateRoute path="/update-email" component={UpdateEmail} />
+            <PrivateRoute path="/update-profile" component={UpdateUser} />
+            <PrivateRoute path="/profile" component={Profile} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+            <Route path="/forgot-password" component={ForgotPassword} />
+          </Switch>
+        </AuthProvider>
+      </Router>
+    </Container>
   );
 }
 
