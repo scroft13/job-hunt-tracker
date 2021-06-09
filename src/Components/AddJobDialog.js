@@ -73,7 +73,7 @@ export const AddJobDialog = (props) => {
         setEmail("");
         setAdditional("");
         handleClose();
-        set
+        setMethod("");
       })
       .catch((error) => {
         console.error("Error adding document: ", error);

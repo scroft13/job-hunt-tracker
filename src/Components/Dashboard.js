@@ -30,7 +30,7 @@ function Dashboard() {
 
   const loadJobs = useCallback(() => {
     db.jobs
-      .orderBy("name")
+      .orderBy("date")
       .where("user", "==", currentUser.uid)
       .onSnapshot((snapshot) => {
         let result = [];
